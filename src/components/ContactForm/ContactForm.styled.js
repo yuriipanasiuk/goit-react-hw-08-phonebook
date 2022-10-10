@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const FormStyled = styled.form`
-  /* background-color: silver; */
+  border: 1px solid black;
+  padding: 10px;
 `;
 
 export const LabelName = styled.span`

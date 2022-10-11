@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { HiPhone } from 'react-icons/hi';
 import {
   Item,
   List,
@@ -11,6 +13,7 @@ const ContactList = ({ contacts, onDelete }) => {
     <List>
       {contacts.map(({ name, number, id }) => (
         <Item key={id}>
+          <HiPhone style={{ color: '#337ab7' }} />
           <PhoneName>{name}</PhoneName>
           <PhoneNumber>{number}</PhoneNumber>
           <Button type="button" onClick={() => onDelete(id)}>
@@ -20,6 +23,16 @@ const ContactList = ({ contacts, onDelete }) => {
       ))}
     </List>
   );
+};
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default ContactList;

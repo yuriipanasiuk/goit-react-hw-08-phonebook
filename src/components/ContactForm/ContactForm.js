@@ -1,5 +1,12 @@
 import { Component } from 'react';
-import { FormStyled, Input, InputLabel, LabelName } from './ContactForm.styled';
+import {
+  FormStyled,
+  Input,
+  InputLabel,
+  LabelName,
+  NameIcon,
+  NumIcon,
+} from './ContactForm.styled';
 import AddContact from './AddContact';
 
 class ContactForm extends Component {
@@ -34,6 +41,7 @@ class ContactForm extends Component {
         <FormStyled onSubmit={this.handleSubmit}>
           <InputLabel>
             <LabelName>Name</LabelName>
+            <NameIcon />
             <Input
               onChange={this.handleChange}
               value={name}
@@ -46,6 +54,7 @@ class ContactForm extends Component {
           </InputLabel>
           <InputLabel>
             <LabelName>Number</LabelName>
+            <NumIcon />
             <Input
               onChange={this.handleChange}
               value={number}

@@ -6,7 +6,7 @@ export const Item = styled.li`
   padding-left: ${p => p.theme.space[3]}px;
 
   :not(:last-child) {
-    margin-bottom: ${p => p.theme.space[3]}px;
+    margin-bottom: ${p => p.theme.space[4]}px;
   }
 `;
 

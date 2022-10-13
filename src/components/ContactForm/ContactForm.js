@@ -1,73 +1,35 @@
 import { Component } from 'react';
-import {
-  FormStyled,
-  Input,
-  InputLabel,
-  LabelName,
-  NameIcon,
-  NumIcon,
-} from './ContactForm.styled';
+import { Form } from './ContactForm.styled';
+
 import AddContact from './AddContact';
+import { Formik } from 'formik';
+import { schema } from 'validationSchema';
+import FormField from './FormField';
+
+const initialValues = {
+  name: '',
+  number: '',
+};
 
 class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
+  handleSubmit = (values, { resetForm }) => {
+    this.props.onSubmit(values);
+    resetForm();
   };
-
-  handleChange = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
-    this.reset();
-  };
-
-  reset() {
-    this.setState({
-      name: '',
-      number: '',
-    });
-  }
 
   render() {
-    const { name, number } = this.state;
-
     return (
-      <>
-        <FormStyled onSubmit={this.handleSubmit}>
-          <InputLabel>
-            <LabelName>Name</LabelName>
-            <NameIcon />
-            <Input
-              onChange={this.handleChange}
-              value={name}
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-          </InputLabel>
-          <InputLabel>
-            <LabelName>Number</LabelName>
-            <NumIcon />
-            <Input
-              onChange={this.handleChange}
-              value={number}
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
-          </InputLabel>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={this.handleSubmit}
+      >
+        <Form autoComplete="off">
+          <FormField label="Name" type="text" name="name" />
+          <FormField label="Number" type="tel" name="number" />
           <AddContact children="Add contact" />
-        </FormStyled>
-      </>
+        </Form>
+      </Formik>
     );
   }
 }

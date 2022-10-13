@@ -2,7 +2,8 @@ export const theme = {
   fontSizes: {
     s: '14px',
     m: '16px',
-    l: '24px',
+    l: '18px',
+    xl: '24px',
   },
   fontWeight: {
     normal: 400,
@@ -19,6 +20,7 @@ export const theme = {
     tableHeadBg: 'rgb(1 127 193)',
     btnBg: '#337ab7',
     outline: 'rgba(255, 255, 255, 0)',
+    error: 'red',
   },
   shadows: {
     shadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.75)',

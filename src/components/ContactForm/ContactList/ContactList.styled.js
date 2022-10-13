@@ -13,7 +13,6 @@ export const Item = styled.li`
 export const List = styled.ul`
   margin-top: ${p => p.theme.space[3]}px;
   padding-left: ${p => p.theme.space[5]}px;
-  /* border: 1px solid red; */
 `;
 
 export const Button = styled.button`
@@ -41,7 +40,6 @@ export const Button = styled.button`
 export const PhoneName = styled.p`
   display: inline;
   margin-left: ${p => p.theme.space[4]}px;
-  margin-right: ${p => p.theme.space[3]}px;
 `;
 
 export const PhoneNumber = styled.p`

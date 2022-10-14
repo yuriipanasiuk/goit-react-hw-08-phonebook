@@ -38,11 +38,10 @@ export const Button = styled.button`
 `;
 
 export const PhoneName = styled.p`
-  display: inline;
+  display: inline-flex;
   margin-left: ${p => p.theme.space[4]}px;
 `;
 
 export const PhoneNumber = styled.p`
-  display: inline;
-  margin-left: auto;
+  display: inline-flex;
 `;

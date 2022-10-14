@@ -5,7 +5,7 @@ export const App = () => {
   return (
     <Box
       bg={'pageBgColor'}
-      width="500px"
+      width="600px"
       ml={'auto'}
       mr={'auto'}
       p={4}

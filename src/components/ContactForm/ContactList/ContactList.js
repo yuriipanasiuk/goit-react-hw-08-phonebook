@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { HiPhone } from 'react-icons/hi';
+import Box from 'components/Box';
 import {
   Item,
   List,
@@ -15,10 +16,13 @@ const ContactList = ({ contacts, onDelete }) => {
         <Item key={id}>
           <HiPhone style={{ color: '#337ab7' }} />
           <PhoneName>{name}</PhoneName>
-          <PhoneNumber>{number}</PhoneNumber>
-          <Button type="button" onClick={() => onDelete(id)}>
-            Delete
-          </Button>
+
+          <Box display="flex" ml="auto" width="250px">
+            <PhoneNumber>{number}</PhoneNumber>
+            <Button type="button" onClick={() => onDelete(id)}>
+              Delete
+            </Button>
+          </Box>
         </Item>
       ))}
     </List>

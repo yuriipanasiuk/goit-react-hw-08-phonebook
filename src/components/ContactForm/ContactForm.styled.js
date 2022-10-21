@@ -37,3 +37,9 @@ export const LabelName = styled.span`
   color: black;
   margin-bottom: ${p => p.theme.space[2]}px;
 `;
+
+export const ErrorMessage = styled.p`
+  color: ${p => p.theme.colors.error};
+  margin-bottom: ${p => p.theme.space[4]}px;
+  font-size: ${p => p.theme.fontSizes.l};
+`;

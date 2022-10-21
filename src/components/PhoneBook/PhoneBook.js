@@ -12,8 +12,7 @@ export default function PhoneBook() {
   const [contacts, setContact] = useState(
     () => JSON.parse(window.localStorage.getItem('contact')) ?? []
   );
-
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     window.localStorage.setItem('contact', JSON.stringify(contacts));
@@ -43,7 +42,7 @@ export default function PhoneBook() {
   };
 
   const filtredContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter)
+    name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (

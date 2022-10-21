@@ -1,9 +1,14 @@
-import { Form, Wraper, Input, LabelName } from './ContactForm.styled';
+import { useForm } from 'react-hook-form';
+import {
+  Form,
+  Wraper,
+  Input,
+  LabelName,
+  ErrorMessage,
+} from './ContactForm.styled';
 import AddContact from './AddContact';
 import { letersRegex, numberRedex } from 'validationSchema';
-import { useForm } from 'react-hook-form';
 
-//TODO: add validation message
 export default function ContactForm(props) {
   const {
     register,
@@ -18,24 +23,52 @@ export default function ContactForm(props) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
       <Wraper>
         <LabelName>Name</LabelName>
         <Input
-          {...register('name', { required: true, pattern: letersRegex })}
+          {...register('name', {
+            required: true,
+            pattern: letersRegex,
+            minLength: 3,
+          })}
           placeholder="Contact name"
+          autoFocus
         />
-        {errors.name && <p>Your name is not bill</p>}
+        {errors.name?.type === 'pattern' && (
+          <ErrorMessage tole="alert">
+            The name should have only english alphabets
+          </ErrorMessage>
+        )}
+        {errors.name?.type === 'required' && (
+          <ErrorMessage role="alert">contact name is required</ErrorMessage>
+        )}
+        {errors.name?.type === 'minLength' && (
+          <ErrorMessage role="alert">
+            contact name must be at least 3 letters
+          </ErrorMessage>
+        )}
       </Wraper>
       <Wraper>
         <LabelName> Number</LabelName>
         <Input
-          {...register('number', { required: true, pattern: numberRedex })}
+          {...register('number', {
+            required: true,
+            pattern: numberRedex,
+          })}
           placeholder="Phone number"
         />
+        {errors.number?.type === 'pattern' && (
+          <ErrorMessage tole="alert">
+            The number should have digits only
+          </ErrorMessage>
+        )}
+        {errors.number?.type === 'required' && (
+          <ErrorMessage role="alert">contact number is required</ErrorMessage>
+        )}
       </Wraper>
-      <input type="submit" />
-      {/* <AddContact children="Add contact" /> */}
+
+      <AddContact children="Add contact" />
     </Form>
   );
 }

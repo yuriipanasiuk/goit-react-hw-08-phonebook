@@ -1,38 +1,25 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Box from 'components/Box';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactForm/ContactList';
 import Filter from 'components/ContactForm/Filter/Filter';
 import { nanoid } from 'nanoid';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import { PhoneContactTitle, ContactListTitle } from './PhoneBook.styled';
 
-class PhoneBook extends Component {
-  state = {
-    contacts: [],
-    filter: '',
-  };
+export default function PhoneBook() {
+  const [contacts, setContact] = useState(
+    () => JSON.parse(window.localStorage.getItem('contact')) ?? []
+  );
 
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    if (parsedContacts) {
-      this.setState({
-        contacts: parsedContacts,
-      });
-    }
-  }
+  const [filter, setFilter] = useState([]);
 
-  componentDidUpdate(prevProps, prevState) {
-    const { contacts } = this.state;
-    if (contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-    }
-  }
+  useEffect(() => {
+    window.localStorage.setItem('contact', JSON.stringify(contacts));
+  }, [contacts]);
 
-  formSubmitHandler = data => {
-    const { name, number } = data;
-    const { contacts } = this.state;
-
+  const formSubmitHandler = ({ name, number }) => {
     const contact = {
       id: nanoid(),
       name,
@@ -41,55 +28,42 @@ class PhoneBook extends Component {
 
     const contactList = contacts.map(({ name }) => name.toLowerCase());
     if (contactList.includes(name.toLowerCase())) {
-      window.alert(`${name} is already in contacts`);
-      return;
+      return toast.warning(`${name} is already in contacts`);
     }
 
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+    setContact(state => [contact, ...state]);
   };
 
-  deletePhoneContact = phoneId => {
-    this.setState(({ contacts }) => ({
-      contacts: contacts.filter(contact => contact.id !== phoneId),
-    }));
+  const changeFilter = e => {
+    setFilter(e.target.value);
   };
 
-  changeFilter = e => {
-    this.setState({
-      filter: e.currentTarget.value,
-    });
+  const deletePhoneContact = phoneId => {
+    setContact(contacts => contacts.filter(contact => contact.id !== phoneId));
   };
 
-  render() {
-    const { contacts, filter } = this.state;
-    const normalisedFilter = filter.toLowerCase();
-    const filtredContacts = contacts.filter(({ name }) =>
-      name.toLowerCase().includes(normalisedFilter)
-    );
+  const filtredContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter)
+  );
 
-    return (
-      <>
-        <Box mb={4}>
-          <PhoneContactTitle>Phonebook</PhoneContactTitle>
-          <Box>
-            <ContactForm onSubmit={this.formSubmitHandler} />
-          </Box>
-        </Box>
+  return (
+    <>
+      <Box mb={4}>
+        <PhoneContactTitle>Phonebook</PhoneContactTitle>
         <Box>
-          <ContactListTitle>Contacts</ContactListTitle>
-          <Box>
-            <Filter value={this.filter} onChange={this.changeFilter} />
-            <ContactList
-              contacts={filtredContacts}
-              onDelete={this.deletePhoneContact}
-            />
-          </Box>
+          <ContactForm onSubmit={formSubmitHandler} />
         </Box>
-      </>
-    );
-  }
+      </Box>
+      <Box>
+        <ContactListTitle>Contacts</ContactListTitle>
+        <Box>
+          <Filter value={filter} onChange={changeFilter} />
+          <ContactList
+            contacts={filtredContacts}
+            onDelete={deletePhoneContact}
+          />
+        </Box>
+      </Box>
+    </>
+  );
 }
-
-export default PhoneBook;

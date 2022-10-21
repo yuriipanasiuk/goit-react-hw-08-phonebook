@@ -1,37 +1,41 @@
-import { Component } from 'react';
-import { Form } from './ContactForm.styled';
-
+import { Form, Wraper, Input, LabelName } from './ContactForm.styled';
 import AddContact from './AddContact';
-import { Formik } from 'formik';
-import { schema } from 'validationSchema';
-import FormField from './FormField';
+import { letersRegex, numberRedex } from 'validationSchema';
+import { useForm } from 'react-hook-form';
 
-const initialValues = {
-  name: '',
-  number: '',
-};
+//TODO: add validation message
+export default function ContactForm(props) {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: { name: '', number: '' } });
 
-class ContactForm extends Component {
-  handleSubmit = (values, { resetForm }) => {
-    this.props.onSubmit(values);
-    resetForm();
+  const onSubmit = data => {
+    props.onSubmit(data);
+    reset();
   };
 
-  render() {
-    return (
-      <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={this.handleSubmit}
-      >
-        <Form autoComplete="off">
-          <FormField label="Name" type="text" name="name" />
-          <FormField label="Number" type="tel" name="number" />
-          <AddContact children="Add contact" />
-        </Form>
-      </Formik>
-    );
-  }
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Wraper>
+        <LabelName>Name</LabelName>
+        <Input
+          {...register('name', { required: true, pattern: letersRegex })}
+          placeholder="Contact name"
+        />
+        {errors.name && <p>Your name is not bill</p>}
+      </Wraper>
+      <Wraper>
+        <LabelName> Number</LabelName>
+        <Input
+          {...register('number', { required: true, pattern: numberRedex })}
+          placeholder="Phone number"
+        />
+      </Wraper>
+      <input type="submit" />
+      {/* <AddContact children="Add contact" /> */}
+    </Form>
+  );
 }
-
-export default ContactForm;

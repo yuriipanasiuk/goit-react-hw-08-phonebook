@@ -1,4 +1,8 @@
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { letersRegex, numberRedex } from 'validationSchema';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 import {
   Form,
   Wraper,
@@ -7,9 +11,12 @@ import {
   ErrorMessage,
 } from './ContactForm.styled';
 import AddContact from './AddContact';
-import { letersRegex, numberRedex } from 'validationSchema';
+import { getContacts } from 'redux/selectors';
 
-export default function ContactForm(props) {
+export default function ContactForm() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
   const {
     register,
     reset,
@@ -17,13 +24,21 @@ export default function ContactForm(props) {
     formState: { errors },
   } = useForm({ defaultValues: { name: '', number: '' } });
 
-  const onSubmit = data => {
-    props.onSubmit(data);
+  const getContact = data => {
+    const { name } = data;
+    const contactsList = contacts.map(({ name }) => name.toLowerCase());
+
+    if (contactsList.includes(name.toLowerCase())) {
+      reset();
+      return toast.warning(`${name} is already in contacts`);
+    }
+
+    dispatch(addContact(data));
     reset();
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+    <Form onSubmit={handleSubmit(getContact)} autoComplete="off">
       <Wraper>
         <LabelName>Name</LabelName>
         <Input

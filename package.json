@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yuriipanasiuk.github.io/oit-react-hw-06-phonebook/",
+  "homepage": "https://yuriipanasiuk.github.io/react-hw-06-phonebook/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.16.3",
@@ -17,6 +17,7 @@
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.6",
     "styled-system": "^5.1.5",
     "web-vitals": "^2.1.3",

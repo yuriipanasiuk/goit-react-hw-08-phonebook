@@ -1,10 +1,14 @@
 import { Input, InputText } from './Filter.styled';
+import { useDispatch } from 'react-redux';
+import { changeFilter } from 'redux/filterSlice';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+
   return (
     <label>
       <InputText>Find contact by name</InputText>
-      <Input value={value} onChange={onChange}></Input>
+      <Input onChange={e => dispatch(changeFilter(e.target.value))} />
     </label>
   );
 };

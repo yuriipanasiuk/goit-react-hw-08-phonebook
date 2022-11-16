@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { letersRegex, numberRedex } from 'validationSchema';
+import { letersRegex, numberRedex } from '../../utils/validationSchema';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import {
@@ -9,8 +9,8 @@ import {
   Input,
   LabelName,
   ErrorMessage,
+  Button,
 } from './ContactForm.styled';
-import AddContact from './AddContact';
 import { getContacts } from 'redux/selectors';
 
 export default function ContactForm() {
@@ -82,8 +82,7 @@ export default function ContactForm() {
           <ErrorMessage role="alert">contact number is required</ErrorMessage>
         )}
       </Wraper>
-
-      <AddContact children="Add contact" />
+      <Button type="submit">Add contact</Button>
     </Form>
   );
 }

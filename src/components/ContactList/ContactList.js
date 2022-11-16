@@ -15,7 +15,6 @@ const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilters);
   const dispath = useDispatch();
-
   const filtredContacts = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter.toLowerCase())
   );

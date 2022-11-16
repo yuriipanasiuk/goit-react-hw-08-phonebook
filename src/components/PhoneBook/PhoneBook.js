@@ -1,17 +1,18 @@
 import 'react-toastify/dist/ReactToastify.css';
 import Box from 'components/Box';
 import ContactForm from 'components/ContactForm';
-import ContactList from 'components/ContactForm/ContactList';
-import Filter from 'components/ContactForm/Filter/Filter';
+import ContactList from 'components/ContactList';
+import Filter from 'components/Filter/Filter';
 import {
   PhoneContactTitle,
   ContactListTitle,
   Notice,
 } from './PhoneBook.styled';
 import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 
 export default function PhoneBook() {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContacts);
 
   return (
     <>

@@ -8,11 +8,22 @@ import {
   ContactListTitle,
   Notice,
 } from './PhoneBook.styled';
-import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getError, getIsLoading, getContacts } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
+
+//TODO: transfer logic from phoneBook to App
 
 export default function PhoneBook() {
   const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <>
@@ -22,11 +33,13 @@ export default function PhoneBook() {
           <ContactForm />
         </div>
       </Box>
+      {isLoading && !error && <b>Request in progress...</b>}
       {contacts.length > 0 ? (
         <div>
           <ContactListTitle>Contacts</ContactListTitle>
           <div>
             <Filter />
+
             <ContactList />
           </div>
         </div>

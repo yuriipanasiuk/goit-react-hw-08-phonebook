@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { letersRegex, numberRedex } from '../../utils/validationSchema';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
 import {
   Form,
   Wraper,
@@ -12,6 +11,7 @@ import {
   Button,
 } from './ContactForm.styled';
 import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ export default function ContactForm() {
 
   const getContact = data => {
     const { name } = data;
+
     const contactsList = contacts.map(({ name }) => name.toLowerCase());
 
     if (contactsList.includes(name.toLowerCase())) {

@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const PhoneContactTitle = styled.h1`
   margin-bottom: ${p => p.theme.space[4]}px;
-  /* text-transform: uppercase; */
+  text-shadow: ${p => p.theme.shadows.titleShadow};
 `;
 
 export const ContactListTitle = styled.h2`
-  margin-bottom: ${p => p.theme.space[4]}px;
+  margin-right: ${p => p.theme.space[6]}px;
+  text-shadow: ${p => p.theme.shadows.titleShadow};
 `;
 
 export const Notice = styled.p`
@@ -14,4 +15,5 @@ export const Notice = styled.p`
   font-size: 24px;
   font-weight: 700;
   color: red;
+  text-shadow: ${p => p.theme.shadows.noticeShadow};
 `;

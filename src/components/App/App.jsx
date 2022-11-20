@@ -1,21 +1,13 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import Box from 'components/Box';
 import PhoneBook from 'components/PhoneBook';
+import { Layout } from './App.styled';
 
 export const App = () => {
   return (
-    <Box
-      bg={'pageBgColor'}
-      width="600px"
-      ml={'auto'}
-      mr={'auto'}
-      p={4}
-      as="section"
-    >
+    <Layout>
       <PhoneBook />
       <ToastContainer autoClose={3000} />
-    </Box>
+    </Layout>
   );
 };

@@ -1,23 +1,23 @@
 import 'react-toastify/dist/ReactToastify.css';
 import Box from 'components/Box';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import FadeLoader from 'react-spinners/FadeLoader';
+import BeatLoader from 'react-spinners/BeatLoader';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter/Filter';
+import { getError, getIsLoading, getContacts } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
 import {
   PhoneContactTitle,
   ContactListTitle,
   Notice,
 } from './PhoneBook.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { getError, getIsLoading, getContacts } from 'redux/selectors';
-import { fetchContacts } from 'redux/operations';
-
-//TODO: transfer logic from phoneBook to App
 
 export default function PhoneBook() {
-  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
 
@@ -33,18 +33,26 @@ export default function PhoneBook() {
           <ContactForm />
         </div>
       </Box>
-      {isLoading && !error && <b>Request in progress...</b>}
+
       {contacts.length > 0 ? (
         <div>
-          <ContactListTitle>Contacts</ContactListTitle>
+          <Box display="flex" mb={4} alignItems="center">
+            <ContactListTitle>Contacts</ContactListTitle>
+            {isLoading && !error && <BeatLoader color={'#337ab7'} />}
+          </Box>
           <div>
             <Filter />
-
             <ContactList />
           </div>
         </div>
       ) : (
-        <Notice>your contact list is empty</Notice>
+        <Box display="flex" justifyContent="center">
+          {isLoading && !error ? (
+            <FadeLoader color={'#337ab7'} />
+          ) : (
+            <Notice>your contact list is empty</Notice>
+          )}
+        </Box>
       )}
     </>
   );

@@ -10,8 +10,8 @@ import {
   ErrorMessage,
   Button,
 } from './ContactForm.styled';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { getContacts } from 'redux/contacts/selectors';
+import { addContact } from 'redux/contacts/operations';
 
 export default function ContactForm() {
   const dispatch = useDispatch();

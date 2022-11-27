@@ -1,8 +1,8 @@
 import { HiPhone } from 'react-icons/hi';
 import Box from 'components/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, getFilters } from 'redux/selectors';
-import { deleteContact } from 'redux/operations';
+import { getContacts, getFilters } from 'redux/contacts/selectors';
+import { deleteContact } from 'redux/contacts/operations';
 
 import {
   Item,

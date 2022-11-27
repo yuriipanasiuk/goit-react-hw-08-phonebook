@@ -7,8 +7,8 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter/Filter';
-import { getError, getIsLoading, getContacts } from 'redux/selectors';
-import { fetchContacts } from 'redux/operations';
+import { getError, getIsLoading, getContacts } from 'redux/contacts/selectors';
+import { fetchContacts } from 'redux/contacts/operations';
 import {
   PhoneContactTitle,
   ContactListTitle,

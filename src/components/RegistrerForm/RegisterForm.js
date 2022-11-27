@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import { emailRedex } from '../../utils/validationSchema';
 import { useDispatch } from 'react-redux';
 import {
   Input,
@@ -47,17 +46,11 @@ export const RegistrationForm = () => {
           type="email"
           {...register('email', {
             required: true,
-            pattern: emailRedex,
           })}
         />
       </Label>
       {errors.email?.type === 'required' && (
         <ErrorMessage tole="alert">email is required</ErrorMessage>
-      )}
-      {errors.email?.type === 'pattern' && (
-        <ErrorMessage tole="alert">
-          email is not valid, must be xxx@xxx.com
-        </ErrorMessage>
       )}
 
       <Label>

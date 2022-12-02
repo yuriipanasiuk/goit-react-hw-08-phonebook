@@ -1,13 +1,16 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
 import { Helmet } from 'react-helmet';
+import { Container } from 'components/AppBar/AppBar.styled';
 
-export const Login = () => {
+const Login = () => {
   return (
-    <div>
+    <Container>
       <Helmet>
         <title>Login</title>
       </Helmet>
       <LoginForm />
-    </div>
+    </Container>
   );
 };
+
+export default Login;

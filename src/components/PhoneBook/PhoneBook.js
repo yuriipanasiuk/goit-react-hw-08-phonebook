@@ -27,7 +27,7 @@ export default function PhoneBook() {
 
   return (
     <>
-      <Box mb={4}>
+      <Box mb={4} mt={4}>
         <PhoneContactTitle>Phonebook</PhoneContactTitle>
         <div>
           <ContactForm />
@@ -35,7 +35,7 @@ export default function PhoneBook() {
       </Box>
 
       {contacts.length > 0 ? (
-        <div>
+        <Box width={600}>
           <Box display="flex" mb={4} alignItems="center">
             <ContactListTitle>Contacts</ContactListTitle>
             {isLoading && !error && <BeatLoader color={'#337ab7'} />}
@@ -44,7 +44,7 @@ export default function PhoneBook() {
             <Filter />
             <ContactList />
           </div>
-        </div>
+        </Box>
       ) : (
         <Box display="flex" justifyContent="center">
           {isLoading && !error ? (

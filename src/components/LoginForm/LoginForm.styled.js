@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  padding: 10px;
   margin-top: ${p => p.theme.space[4]}px;
 `;
 

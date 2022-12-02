@@ -1,13 +1,16 @@
 import { Helmet } from 'react-helmet';
 import { RegistrationForm } from 'components/RegistrerForm/RegisterForm';
+import { Container } from 'components/AppBar/AppBar.styled';
 
-export const Register = () => {
+const Register = () => {
   return (
-    <div>
+    <Container>
       <Helmet>
         <title>Registration</title>
       </Helmet>
       <RegistrationForm />
-    </div>
+    </Container>
   );
 };
+
+export default Register;

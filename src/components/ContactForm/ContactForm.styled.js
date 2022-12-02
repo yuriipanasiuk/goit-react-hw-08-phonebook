@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  border: 2px inset #1e90ff;
+  /* border: 2px inset #1e90ff; */
   padding: 10px;
   border-radius: ${p => p.theme.radii.normal};
 `;

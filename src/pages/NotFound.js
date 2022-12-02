@@ -1,9 +1,3 @@
 import { ErrorPage } from 'components/ErrorPage/ErrorPage';
 
-export const NotFound = () => {
-  return (
-    <>
-      <ErrorPage />
-    </>
-  );
-};
+export const NotFound = () => <ErrorPage />;

@@ -31,6 +31,7 @@ export const RegistrationForm = () => {
         <LabelName>User Name</LabelName>
         <Input
           type="text"
+          autoFocus
           {...register('name', {
             required: true,
           })}

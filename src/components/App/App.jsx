@@ -1,10 +1,9 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { lazy } from 'react';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { Home } from 'pages/Home/Home';
-import { NotFound } from 'pages/NotFound';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks/hooks';
 import { RestrictedRoute } from 'components/RestrictedRoute';
@@ -13,6 +12,7 @@ import { PrivateRoute } from 'components/PrivateRoute';
 const Register = lazy(() => import('pages/Register'));
 const Login = lazy(() => import('pages/Login'));
 const Contacts = lazy(() => import('pages/Contacts'));
+const NotFound = lazy(() => import('pages/NotFound'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,14 @@ export const App = () => {
               }
             />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={null}>
+                <NotFound />
+              </Suspense>
+            }
+          />
         </Routes>
       </div>
     )

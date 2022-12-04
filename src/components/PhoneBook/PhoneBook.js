@@ -13,6 +13,7 @@ import {
   PhoneContactTitle,
   ContactListTitle,
   Notice,
+  Wraper,
 } from './PhoneBook.styled';
 
 export default function PhoneBook() {
@@ -26,7 +27,7 @@ export default function PhoneBook() {
   }, [dispatch]);
 
   return (
-    <>
+    <Wraper>
       <Box mb={4} mt={4}>
         <PhoneContactTitle>Phonebook</PhoneContactTitle>
         <div>
@@ -54,6 +55,6 @@ export default function PhoneBook() {
           )}
         </Box>
       )}
-    </>
+    </Wraper>
   );
 }

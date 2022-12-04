@@ -5,9 +5,9 @@ import {
   NoticeText,
   Layout,
   DirectionText,
-} from './ErrorPage.styled';
+} from './NotFound.styled';
 
-export const ErrorPage = () => {
+const NotFound = () => {
   return (
     <Box ml="auto" mr="auto" pt={5}>
       <ErrorPageText>404</ErrorPageText>
@@ -19,3 +19,5 @@ export const ErrorPage = () => {
     </Box>
   );
 };
+
+export default NotFound;

@@ -30,6 +30,7 @@ export const LoginForm = () => {
         <LabelName>Email</LabelName>
         <Input
           type="email"
+          autoFocus
           {...register('email', {
             required: true,
           })}
